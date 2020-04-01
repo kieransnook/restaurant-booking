@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/kieransnook/restaurant-booking/issues"
   },
-  "homepage": "https://github.com/kieransnook/restaurant-booking#readme"
+  "homepage": "https://github.com/kieransnook/restaurant-booking#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }

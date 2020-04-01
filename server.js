@@ -1,15 +1,25 @@
-var http = require("http");
+const express = require("express");
 
-// Set our port to 3000
-var PORT = 3000;
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-var server = http.createServer(handleRequest);
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-function handleRequest(req, res) {
-    res.end("It Works!! Path Hit: " + req.url);
-}
 
-// Starts our server.
-server.listen(PORT, function() {
-  console.log(`Server listening on: http://localhost:${PORT}`);
+
+// Route to serve index.html
+
+// Route to serve reservations.html
+
+// Route to serve new.html
+
+// Route to serve JSON of the list of reservations
+
+// Route to serve JSON of the list of wait-listed reservations
+
+// Route to add new reservation
+
+app.listen(PORT, () => {
+  console.log(`App is running on http://localhost:${PORT}`);
 });

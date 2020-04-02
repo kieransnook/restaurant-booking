@@ -17,6 +17,7 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
+    <script src="https://code.jquery.com/jquery.js"></script>
   </head>
   <body>
     <div class="container">
@@ -107,6 +108,22 @@
       </footer>
     </div>
 
-    <script src="" async defer></script>
+    <script async defer>
+      $("submit").on("click", function(){
+        var reserveObject = {
+          customerName: $("#reserve_name").val().trim(),
+          phoneNumber: $("#reserve_phone").val().trim(),
+          email: $("#reserve_email").val().trim(),
+          id: $("#reserve_id").val().trim()
+        }
+        $.post("/api/tables", reserveObject, function(data) {
+          if(data){
+            alert("You've successfully made a reservation!")
+          } else {
+            alert("Too many reservations already, you're on the waitlist")
+          }
+        })
+      })
+    </script>
   </body>
 </html>

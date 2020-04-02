@@ -18,12 +18,6 @@ var reservations = [
   },
 ];
 var waitlist = [
-  { routeName: "john",
-    customerName: "John",
-    phoneNumber: "770-123-4567",
-    email: "john@gmail.com",
-    id: 1
-  },
 ];
 
 // Route to serve index.html
@@ -47,7 +41,31 @@ app.get("/api/waitlist", function(req, res) {
   return res.json(waitlist);
 });
 // Route to add new reservation
-
+app.post("/api/tables", function(req, res) {
+  console.log(req.body);
+  // checks if the requesting user already has a reservation
+  for (var i = 0; i < reservations.length; i++) {
+    if(reservations[i].id === req.body.id){
+      return res.json("ID is already taken!")
+    }
+  } 
+  // checks if the requesting user is already on the waitlist
+  for (var i = 0; i < waitlist.length; i++) {
+    if(waitlist[i].id === req.body.id){
+      return res.json("ID is already taken!")
+    }
+  } 
+  
+  // checks if the reservations array is full (5 total) and pushes to proper array
+  if (reservations.length >= 5){
+    waitlist.push(req.body);
+    return res.json(false);
+  } else {
+    reservations.push(req.body);
+    return res.json(true);
+  }
+  
+});
 
 app.listen(PORT, () => {
   console.log(`App is running on http://localhost:${PORT}`);
